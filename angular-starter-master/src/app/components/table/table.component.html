@@ -1,0 +1,69 @@
+<div class="container-fluid">
+
+  <div *ngIf="isLoading" style="display: flex;justify-content: space-between; align-items: center">
+    <md-spinner style="height: 40px"></md-spinner>
+  </div>
+
+  <div class="row" *ngIf="!isLoading">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Striped Table</h4>
+          <p class="category">Here is a subtitle for this table</p>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th *ngFor="let cell of table.headerRow">{{ cell }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of table.dataRows">
+              <td *ngFor="let cell of row;  let last = last">
+                <div *ngIf="!last">
+                  {{cell}}
+                </div>
+                <div *ngIf="last">
+                  <button md-icon-button (click)="viewTopic(row)"><md-icon>payment</md-icon></button>
+                  <button md-icon-button (click)="deleteTopic(row)"><md-icon>delete</md-icon></button>
+
+                </div>
+
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!--<div class="col-md-12">-->
+    <!--<div class="card card-plain">-->
+    <!--<div class="header">-->
+    <!--<h4 class="title">Table on Plain Background</h4>-->
+    <!--<p class="category">Here is a subtitle for this table</p>-->
+    <!--</div>-->
+    <!--<div class="content table-responsive table-full-width">-->
+    <!--<table class="table table-hover">-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let row of tableData2.dataRows">-->
+    <!--<td *ngFor="let cell of row">{{cell}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>
