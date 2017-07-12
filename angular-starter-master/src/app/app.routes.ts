@@ -8,6 +8,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {TableComponent} from './components/table/table.component';
 import {NoneComponent} from './components/no-content/none.component';
 import {MessageComponent} from "./message/message.component";
+import {BrokerComponent} from "./broker/broker.component";
 
 export const ROUTES: Routes = [
   {
@@ -18,6 +19,10 @@ export const ROUTES: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'broker',
+    component: BrokerComponent
   },
   {
     path: 'topics',

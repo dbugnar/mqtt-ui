@@ -87,59 +87,59 @@ export class DashboardComponent implements OnInit {
     ];
 
     Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-
-
-    let data = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      series: [
-        [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
-        [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
-      ]
-    };
-
-    let options = {
-      seriesBarDistance: 10,
-      axisX: {
-        showGrid: false
-      },
-      height: '245px'
-    };
-
-    let responsiveOptions = [
-      ['screen and (max-width: 640px)', {
-        seriesBarDistance: 5,
-        axisX: {
-          labelInterpolationFnc: function (value) {
-            return value[0];
-          }
-        }
-      }]
-    ];
-
-    Chartist.Line('#chartActivity', data, options, responsiveOptions);
-
-    let dataPreferences = {
-      series: [
-        [25, 30, 20, 25]
-      ]
-    };
-
-    let optionsPreferences = {
-      donut: true,
-      donutWidth: 40,
-      startAngle: 0,
-      total: 100,
-      showLabel: false,
-      axisX: {
-        showGrid: false
-      }
-    };
-
-    Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-    Chartist.Pie('#chartPreferences', {
-      labels: [ '62%', '32%', '6%' ],
-      series: [62, 32, 6]
-    });
+    //
+    //
+    // let data = {
+    //   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    //   series: [
+    //     [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
+    //     [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
+    //   ]
+    // };
+    //
+    // let options = {
+    //   seriesBarDistance: 10,
+    //   axisX: {
+    //     showGrid: false
+    //   },
+    //   height: '245px'
+    // };
+    //
+    // let responsiveOptions = [
+    //   ['screen and (max-width: 640px)', {
+    //     seriesBarDistance: 5,
+    //     axisX: {
+    //       labelInterpolationFnc: function (value) {
+    //         return value[0];
+    //       }
+    //     }
+    //   }]
+    // ];
+    //
+    // Chartist.Line('#chartActivity', data, options, responsiveOptions);
+    //
+    // let dataPreferences = {
+    //   series: [
+    //     [25, 30, 20, 25]
+    //   ]
+    // };
+    //
+    // let optionsPreferences = {
+    //   donut: true,
+    //   donutWidth: 40,
+    //   startAngle: 0,
+    //   total: 100,
+    //   showLabel: false,
+    //   axisX: {
+    //     showGrid: false
+    //   }
+    // };
+    //
+    // Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+    //
+    // Chartist.Pie('#chartPreferences', {
+    //   labels: [ '62%', '32%', '6%' ],
+    //   series: [62, 32, 6]
+    // });
   }
 }

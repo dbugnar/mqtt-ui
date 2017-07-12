@@ -42,6 +42,7 @@ import {DashboardService} from "./services/dashboard.service";
 import {NoneComponent} from "./components/no-content/none.component";
 import {MessageComponent} from "./message/message.component";
 import { MessageService } from './services/message.service';
+import {BrokerComponent} from "./broker/broker.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -67,6 +68,7 @@ type StoreType = {
     AppComponent,
     DashboardComponent,
     TableComponent,
+    BrokerComponent,
     NoneComponent,
     MessageComponent,
     NoContentComponent,

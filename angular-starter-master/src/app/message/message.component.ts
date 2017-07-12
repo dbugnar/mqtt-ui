@@ -2,7 +2,7 @@
  * Created by razvanbretoiu on 02.07.2017.
  */
 import * as Chartist from 'chartist';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { MessageService } from '../services/message.service';
 
@@ -15,13 +15,19 @@ declare interface TableData {
   selector: 'app-message',
   templateUrl: 'message.component.html'
 })
-export class MessageComponent implements OnInit{
+export class MessageComponent implements OnInit, OnDestroy{
 
   public table: TableData;
   public topic: string;
   public lastTime: number;
   public isLoading: boolean;
-  private idInterval;
+  private idInterval2;
+  private dateChart:any = {
+    labels: [],
+    series: [
+      []
+    ]
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +49,7 @@ export class MessageComponent implements OnInit{
           messages => this.handleSuccessGetMessagesFromTopic(messages),
           error => console.log(error),
           () => {
-            this.idInterval = setInterval(() => {
+            this.idInterval2 = setInterval(() => {
               this.getMessageAfter5Seconds();
             }, 5000);
             this.isLoading = false
@@ -132,11 +138,14 @@ export class MessageComponent implements OnInit{
           let dataRows = [];
           for (let i = 0; i < messages.length; i++) {
             dataRows[i] = [i, messages[i].message, this.getDate(messages[i].time), messages[i].qos];
+
+            // this.dateChart.series[0].concat
           }
           if (dataRows.length != 0) {
             this.lastTime = messages[messages.length - 1].time;
             this.table.dataRows = dataRows.concat(this.table.dataRows);
           }
+          this.setChart(messages);
         },
         error => console.log(error),
       )
@@ -168,20 +177,103 @@ export class MessageComponent implements OnInit{
     return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
   }
 
+  private getSeries(data, labelsLenght) {
+    let series = [];
+
+
+    for (let i = 0; i <data.length; i++) {
+      series[i] = +data[i].message;
+    }
+
+    let ret = this.dateChart.series[0].concat(series);
+
+    console.log(labelsLenght);
+    if (ret.length > labelsLenght){
+
+      let indexFrom = ret.length - labelsLenght;
+      let ret2 = [];
+      let j = 0;
+      for (let i = indexFrom; i < ret.length; i++){
+        ret2[j++] = ret[i]
+      }
+      ret = ret2;
+    }
+
+    return ret;
+  }
+
+
+  private getLabels(data) {
+
+    let lebs  = [];
+    for (let i = 0; i < data.length; i++) {
+      lebs[i] = this.getDate(data[i].time)
+    }
+
+    if (lebs.length == 0) {
+      return this.dateChart.labels;
+    }
+
+    let allLabels = this.dateChart.labels.concat(lebs);
+
+    console.log(allLabels);
+    let length = allLabels.length;
+    let labels = [];
+
+
+    if (length <= 6) {
+      for (let i = 0; i < length; i++) {
+        labels[i] = allLabels[i];
+      }
+    }else if (length > 0) {
+      let i = 0;
+      labels[i++] = allLabels[0];
+
+      if (Math.round(length / 2) - 2 > 0)
+        labels[i++] = allLabels[Math.round(length / 2) - 2];
+
+      if (Math.round(length / 2) - 1 > 0)
+        labels[i++] = allLabels[Math.round(length / 2) - 1];
+
+      labels[i++] = allLabels[Math.round(length / 2)];
+
+      if (Math.round(length / 2) + 1 < length)
+        labels[i++] = allLabels[Math.round(length / 2) + 1];
+
+      if (Math.round(length / 2) + 2 < length)
+        labels[i++] = allLabels[Math.round(length / 2) + 2];
+
+      labels[i] = allLabels[length - 1];
+    }
+
+
+    return labels;
+  }
+
+
+
   private setChart(data) {
 
     console.log(data);
 
-    let dataSales = {
-      labels: ['9:00', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-      series: [
-        [287, 385, 490, 100, 594, 626, 254, 895, 952],
-      ]
+
+    //console.log(this.getSeries(data));
+
+    let labes = this.getLabels(data);
+    let series = this.getSeries(data, labes.length);
+    this.dateChart = {
+      labels: labes,
+      series: [ series ]
     };
+
+    console.log(this.dateChart.series[0]);
+    let height = this.findMaxFromSeries(this.dateChart.series[0]);
+    height += 5;
+    // height max series
 
     let optionsSales = {
       low: 0,
-      high: 1000,
+      high: height,
       showArea: true,
       height: '245px',
       axisX: {
@@ -205,12 +297,24 @@ export class MessageComponent implements OnInit{
     ];
 
 
-    Chartist.Line('#chartMessageActivity', dataSales, optionsSales, responsiveSales);
+    Chartist.Line('#chartMessageActivity', this.dateChart, optionsSales, responsiveSales);
   }
 
   ngOnDestroy() {
-    if (this.idInterval) {
-      clearInterval(this.idInterval);
+    if (this.idInterval2) {
+      clearInterval(this.idInterval2);
     }
   }
+
+  private findMaxFromSeries(series) {
+    let max = -1;
+    for (let i = 0; i  < series.length;i++) {
+      if (series[i] > max)
+        max = series[i];
+    }
+
+    return max;
+  }
+
+
 }

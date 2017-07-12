@@ -1,0 +1,37 @@
+<div class="container-fluid">
+
+  <div *ngIf="isLoading" style="display: flex;justify-content: space-between; align-items: center">
+    <md-spinner style="height: 40px"></md-spinner>
+  </div>
+
+  <div class="row" *ngIf="!isLoading">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Status Broker</h4>
+          <!--<p class="category">Se pot vedea mesajele dintr-un subiect sau dezabona de la subiect.</p>-->
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th *ngFor="let cell of table.headerRow">{{ cell }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of table.dataRows">
+              <td *ngFor="let cell of row">
+                <div>
+                  {{cell}}
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
