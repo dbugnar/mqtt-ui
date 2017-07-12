@@ -4,9 +4,6 @@ import { HOST } from '../core/constants';
 import { Utils } from '../core/utils/Utils';
 import {Observable} from "rxjs";
 
-/**
- * Created by razvanbretoiu on 02.07.2017.
- */
 
 @Injectable()
 export class MessageService {

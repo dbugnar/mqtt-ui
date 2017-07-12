@@ -21,7 +21,7 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
-const API_URL = process.env.API_URL = 'http://192.168.0.113:12344/';
+const API_URL = process.env.API_URL = 'http://207.154.208.106:12344/';
 
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {

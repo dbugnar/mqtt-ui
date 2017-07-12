@@ -6,7 +6,6 @@ import { NoContentComponent } from './no-content';
 import { DataResolver } from './app.resolver';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {TableComponent} from './components/table/table.component';
-import {UserComponent} from './user/user.component';
 import {NoneComponent} from './components/no-content/none.component';
 import {MessageComponent} from "./message/message.component";
 
@@ -27,10 +26,6 @@ export const ROUTES: Routes = [
       { path: '', component: NoneComponent, pathMatch: 'full'},
       { path: ':topic', component: MessageComponent }
     ]
-  },
-  {
-    path: 'user',
-    component: UserComponent
   },
   { path: '**',    component: NoContentComponent },
 ];

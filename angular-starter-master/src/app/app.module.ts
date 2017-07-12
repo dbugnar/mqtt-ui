@@ -37,7 +37,6 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { MdButtonModule, MdProgressSpinnerModule, MdIconModule} from "@angular/material";
-import { UserComponent } from './user/user.component';
 import {TopicService} from "./services/topic.service";
 import {DashboardService} from "./services/dashboard.service";
 import {NoneComponent} from "./components/no-content/none.component";
@@ -68,7 +67,6 @@ type StoreType = {
     AppComponent,
     DashboardComponent,
     TableComponent,
-    UserComponent,
     NoneComponent,
     MessageComponent,
     NoContentComponent,

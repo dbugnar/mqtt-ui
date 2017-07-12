@@ -1,6 +1,4 @@
-/**
- * Created by razvanbretoiu on 02.07.2017.
- */
+
 import {Injectable} from "@angular/core";
 import { Http } from "@angular/http";
 import { HOST } from '../core/constants';
